@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingDojo2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="960" Width="1440" Background="Black">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Red" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Width="1165">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Source="Images/Warning-WF.png" Width="60" />
+                <Label Content="Überlauf Grauwasser" Foreground="White" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+            </StackPanel>
+        </Border>
+        <Label Content="...tbd..." HorizontalAlignment="Center" Margin="10" Grid.Row="1" VerticalAlignment="Center" FontSize="24" Foreground="White"/>
+
     </Grid>
 </Window>
