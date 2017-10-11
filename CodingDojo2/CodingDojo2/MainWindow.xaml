@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingDojo2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="960" Width="1440" Background="Black">
+        Title="MainWindow" Height="960" Width="1440" Background="Black" MinHeight="480" MinWidth="640">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -29,63 +29,67 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Grid.Column="1" Margin="10">
+
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="48" Margin="1" Source="Images/Cloud sun02-WF.png" />
+                                <Label Content="20 °" VerticalAlignment="Center" FontSize="18" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="48" Margin="1" Source="Images/Wind.png" />
+                                <Label Content="12 km/h" VerticalAlignment="Center" FontSize="18" Foreground="White" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="48" Margin="1" Source="Images/Solar.png" />
+                                <Label Content="3.545 W" VerticalAlignment="Center" FontSize="18" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="64" Margin="1" Source="Images/Man-01.png" />
+                                <Label Content="0" VerticalAlignment="Center" FontSize="18" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="48" Margin="1" Source="Images/Lock-WF.png" />
+                                <Label Content="OK" VerticalAlignment="Center" FontSize="18" Foreground="White" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="48" Margin="1" Source="Images/Message Mail-WF.png" />
+                                <Label Content="7" VerticalAlignment="Center" FontSize="18" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Height="48" Margin="1" Source="Images/Tasks.png" />
+                                <Label Content="4" VerticalAlignment="Center" FontSize="18" Foreground="White" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0,0,0,1" BorderBrush="White">
+                        <StackPanel>
+                            <Button Content="Übersicht"  FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
+                            <Button Content="Räume"      FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
+                            <Button Content="Geräte"     FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
+                            <Button Content="Gebäude"    FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
+                            <Button Content="Sicherheit" FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
+                            <Button Content="Multimedia" FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
             
-        <StackPanel Grid.Column="1" Margin="10">
-            <Border BorderThickness="0,0,0,1" BorderBrush="White">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="48" Margin="1" Source="Images/Cloud sun02-WF.png" />
-                        <Label Content="20 °" VerticalAlignment="Center" FontSize="18" Foreground="White" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="48" Margin="1" Source="Images/Wind.png" />
-                        <Label Content="12 km/h" VerticalAlignment="Center" FontSize="18" Foreground="White" />
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-
-            <Border BorderThickness="0,0,0,1" BorderBrush="White">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="48" Margin="1" Source="Images/Solar.png" />
-                        <Label Content="3.545 W" VerticalAlignment="Center" FontSize="18" Foreground="White" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="64" Margin="1" Source="Images/Man-01.png" />
-                        <Label Content="0" VerticalAlignment="Center" FontSize="18" Foreground="White" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="48" Margin="1" Source="Images/Lock-WF.png" />
-                        <Label Content="OK" VerticalAlignment="Center" FontSize="18" Foreground="White" />
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-
-            <Border BorderThickness="0,0,0,1" BorderBrush="White">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="48" Margin="1" Source="Images/Message Mail-WF.png" />
-                        <Label Content="7" VerticalAlignment="Center" FontSize="18" Foreground="White" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="48" Margin="1" Source="Images/Tasks.png" />
-                        <Label Content="4" VerticalAlignment="Center" FontSize="18" Foreground="White" />
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-
-                <Border BorderThickness="0,0,0,1" BorderBrush="White">
-                    <StackPanel>
-                        <Button Content="Übersicht"  FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
-                        <Button Content="Räume"      FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
-                        <Button Content="Geräte"     FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
-                        <Button Content="Gebäude"    FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
-                        <Button Content="Sicherheit" FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
-                        <Button Content="Multimedia" FontSize="18" Background="Black" Foreground="White" Margin="10" Padding="20,15" BorderBrush="White"></Button>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
-
             <Border BorderThickness="0,1,0,0" BorderBrush="White" Grid.Row="2">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
