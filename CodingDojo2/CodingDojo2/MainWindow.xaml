@@ -53,7 +53,7 @@
                                 <Label Content="3.545 W" VerticalAlignment="Center" FontSize="18" Foreground="White" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Image Height="64" Margin="1" Source="Images/Man-01.png" />
+                                <Image Height="48" Margin="1" Source="Images/Man-01.png" />
                                 <Label Content="0" VerticalAlignment="Center" FontSize="18" Foreground="White" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
