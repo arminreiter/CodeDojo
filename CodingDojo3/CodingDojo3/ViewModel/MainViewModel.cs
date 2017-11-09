@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using System.Windows.Threading;
 
 namespace CodingDojo3.ViewModel
 {
@@ -14,13 +15,13 @@ namespace CodingDojo3.ViewModel
 
         public MainViewModel()
         {
-            Timer t = new Timer();
-            t.Interval = 250; // 4 times per second
-            t.Elapsed += T_Elapsed;
+            DispatcherTimer t = new DispatcherTimer();
+            t.Interval = new TimeSpan(250); // 4 times per second
+            t.Tick += T_Tick;
             t.Start();
         }
-        
-        private void T_Elapsed(object sender, ElapsedEventArgs e)
+
+        private void T_Tick(object sender, EventArgs e)
         {
             CurrentDate = DateTime.Now.ToLocalTime().ToShortDateString();
             CurrentTime = DateTime.Now.ToLocalTime().ToLongTimeString();
