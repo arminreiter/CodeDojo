@@ -1,13 +1,9 @@
-﻿using CodingDojo3.Simulation;
+﻿using CodingDojo3.Commands;
+using CodingDojo3.Simulation;
 using Shared.Interfaces;
-using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Timers;
 using System.Windows.Threading;
 
 namespace CodingDojo3.ViewModel
