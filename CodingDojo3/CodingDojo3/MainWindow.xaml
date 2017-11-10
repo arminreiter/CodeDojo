@@ -31,13 +31,30 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Margin="10" >
             <Label Content="Aktoren" Margin="10" FontSize="24" Foreground="White" />
-            <DataGrid Margin="10" Height="230" />
+            <DataGrid Margin="10" Height="230" ItemsSource="{Binding ActuatorData}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Item.Id}" Header="Id" />
+                    <DataGridTextColumn Binding="{Binding Item.Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Item.Description}" Header="Description" />
+                    <DataGridTextColumn Binding="{Binding Item.Room}" Header="Room" />
+                    <DataGridTextColumn Binding="{Binding Value}" Header="Value" />
+                    <DataGridTextColumn Binding="{Binding Tmp}" Header="Tmp" />
+                </DataGrid.Columns>
+            </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Hinzufügen" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75" Background="Black" Foreground="White" />
+                <Button Content="Hinzufügen" Command="{Binding AddActuatorCommand}" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75" Background="Black" Foreground="White" />
                 <Button Content="Löschen" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75" Background="Black" Foreground="White" />
             </StackPanel>
             <Label Content="Sensoren" Margin="10" FontSize="24" Foreground="White" />
-            <DataGrid Margin="10" Height="230" />
+            <DataGrid Margin="10" Height="230" ItemsSource="{Binding SensorData}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Item.Id}" Header="Id" />
+                    <DataGridTextColumn Binding="{Binding Item.Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Item.Description}" Header="Description" />
+                    <DataGridTextColumn Binding="{Binding Item.Room}" Header="Room" />
+                    <DataGridTextColumn Binding="{Binding Value}" Header="Value" />
+                </DataGrid.Columns>
+            </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Hinzufügen" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75" Background="Black" Foreground="White" />
                 <Button Content="Löschen" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top" Width="75" Background="Black" Foreground="White" />
