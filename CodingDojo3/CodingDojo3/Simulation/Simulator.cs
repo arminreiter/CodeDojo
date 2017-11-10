@@ -59,7 +59,7 @@ namespace CodingDojo3.Simulation
             {
                 foreach (var item in Items)
                 {
-                    item.Value = GenerateValue(item.GetValueType());
+                    item.Value = GenerateValue(item.ValueType);
                 }
             }
             catch (Exception e)

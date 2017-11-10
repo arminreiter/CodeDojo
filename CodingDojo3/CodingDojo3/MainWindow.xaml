@@ -37,6 +37,8 @@
                     <DataGridTextColumn Binding="{Binding Item.Name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding Item.Description}" Header="Description" />
                     <DataGridTextColumn Binding="{Binding Item.Room}" Header="Room" />
+                    <DataGridTextColumn Binding="{Binding Mode}" Header="Mode" />
+                    <DataGridTextColumn Binding="{Binding ValueType.Name}" Header="ValueType" />
                     <DataGridTextColumn Binding="{Binding Value}" Header="Value" />
                 </DataGrid.Columns>
             </DataGrid>
@@ -51,6 +53,8 @@
                     <DataGridTextColumn Binding="{Binding Item.Name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding Item.Description}" Header="Description" />
                     <DataGridTextColumn Binding="{Binding Item.Room}" Header="Room" />
+                    <DataGridTextColumn Binding="{Binding Mode}" Header="Mode" />
+                    <DataGridTextColumn Binding="{Binding ValueType.Name}" Header="ValueType" />
                     <DataGridTextColumn Binding="{Binding Value}" Header="Value" />
                 </DataGrid.Columns>
             </DataGrid>

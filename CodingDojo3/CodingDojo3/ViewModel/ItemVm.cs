@@ -42,15 +42,47 @@ namespace CodingDojo3.ViewModel
             }
         }
 
-        public Type GetValueType()
+        public string Mode
         {
-            if (_item is ISensor sensor)
-                return sensor.SensorValueType;
+            get
+            {
+                
+                if (_item is ISensor sensor)
+                    return sensor.SensorMode.ToString();
 
-            if (_item is IActuator actuator)
-                return actuator.ActuatorValueType;
+                if (_item is IActuator actuator)
+                    return actuator.ActuatorMode.ToString();
 
-            return typeof(object);
+                return String.Empty;
+            }
+            set
+            {
+                try
+                {
+                    if (_item is ISensor sensor)
+                        sensor.SensorMode = (SensorModeType)Enum.Parse(typeof(SensorModeType), value);
+
+                    if (_item is IActuator actuator)
+                        actuator.ActuatorMode = (ModeType)Enum.Parse(typeof(ModeType), value);
+
+                    NotifyPropertyChanged();
+                }
+                catch (Exception) { } // quick and dirty 
+            }
+        }
+
+        public Type ValueType
+        {
+            get
+            {
+                if (_item is ISensor sensor)
+                    return sensor.SensorValueType;
+
+                if (_item is IActuator actuator)
+                    return actuator.ActuatorValueType;
+
+                return typeof(object);
+            }
         }
 
         public ItemVm(ISensor sensor)
