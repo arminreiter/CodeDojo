@@ -18,14 +18,6 @@ namespace CodingDojo3.ViewModel
             }
         }
 
-        private string _tmp = "asdf";
-
-        public string Tmp
-        {
-            get { return _tmp; }
-            set { _tmp = value; NotifyPropertyChanged(); }
-        }
-
         public object Value
         {
             get

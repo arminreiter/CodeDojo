@@ -1,6 +1,7 @@
 ﻿using CodingDojo3.Commands;
 using CodingDojo3.Simulation;
 using Shared.Interfaces;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,9 +24,7 @@ namespace CodingDojo3.ViewModel
                 return new RelayCommand(
                     (param) => 
                     {
-                        //ActuatorData.Add(new ItemVm(new Switch("Test", "just a test", "WZ", 17)));
-                        ActuatorData[2].Tmp = "12";
-                        ActuatorData[2].Value = "12";
+                        ActuatorData.Add(new ItemVm(new Switch("Test", "just a test", "WZ", 17)));
                     },
                     () => true);
             }
@@ -33,7 +32,6 @@ namespace CodingDojo3.ViewModel
 
         public MainViewModel()
         {
-            AddTimer();
             SensorData = new ObservableCollection<ItemVm>();
             ActuatorData = new ObservableCollection<ItemVm>();
             Simulator sim = new Simulator(new List<ItemVm>());
@@ -45,6 +43,7 @@ namespace CodingDojo3.ViewModel
                 else if (item.Item is IActuator)
                     ActuatorData.Add(item);
             }
+            AddTimer();
         }
 
         private void AddTimer()

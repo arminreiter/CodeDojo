@@ -3,6 +3,7 @@ using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace CodingDojo3.Simulation
 {
@@ -10,7 +11,6 @@ namespace CodingDojo3.Simulation
     {
         private static Random rand = new Random(5);
         public List<ItemVm> Items { get; set; }
-
 
         /// <summary>
         /// Generates Demo Data (Sensors and Actuators and Starts manipulating the Values every 3 Secs.
@@ -20,9 +20,18 @@ namespace CodingDojo3.Simulation
         {
             this.Items = items;
             GenerateDemoData();
-            ThreadPool.QueueUserWorkItem(StartGeneratingDemoData);
+
+            DispatcherTimer t = new DispatcherTimer();
+            t.Interval = new TimeSpan(0, 0, 3);
+            t.Tick += T_Tick;
+            t.Start();
         }
-        
+
+        private void T_Tick(object sender, EventArgs e)
+        {
+            UpdateDemoData();
+        }
+
         private void GenerateDemoData()
         {
             Items.Add(new ItemVm(new Switch("0.01", "TA Wohnzimmer", "WZ", 1)));
@@ -41,34 +50,30 @@ namespace CodingDojo3.Simulation
             Items.Add(new ItemVm(new PowerJack("2.03", "Dose Badezimmer", "Bad", 103)));
             Items.Add(new ItemVm(new PowerJack("2.04", "Dose Wohnzimmer", "WZ", 104)));
             Items.Add(new ItemVm(new PowerJack("2.05", "Dose Wohnzimmer", "WZ", 105)));
+            UpdateDemoData(); // sets values
         }
 
-        private void StartGeneratingDemoData(object o)
+        private void UpdateDemoData()
         {
-            while (true)
+            try
             {
-                try
+                foreach (var item in Items)
                 {
-                    foreach (var item in Items)
-                    {
-                        item.Value = GenerateValue(item.GetValueType());
-                        item.Tmp = rand.Next(22, 9891).ToString();
-                    }
+                    item.Value = GenerateValue(item.GetValueType());
                 }
-                catch (Exception e)
-                {
-                    var m = e.Message;
-                }
-
-                Thread.Sleep(3000);
             }
+            catch (Exception e)
+            {
+                var m = e.Message;
+            }
+
         }
 
         private object GenerateValue(Type t)
         {
-            if(t == typeof(bool))
+            if (t == typeof(bool))
                 return RandNo();
-            
+
             if (t == typeof(byte))
                 return rand.Next(0, 3);
 

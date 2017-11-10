@@ -38,7 +38,6 @@
                     <DataGridTextColumn Binding="{Binding Item.Description}" Header="Description" />
                     <DataGridTextColumn Binding="{Binding Item.Room}" Header="Room" />
                     <DataGridTextColumn Binding="{Binding Value}" Header="Value" />
-                    <DataGridTextColumn Binding="{Binding Tmp}" Header="Tmp" />
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
