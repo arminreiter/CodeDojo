@@ -5,8 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingDojo4.Server"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Server" Height="350" Width="525">
     <Grid>
-        
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Start" Width="80" Margin="10" />
+                <Button Content="Stop" Width="80" Margin="10" />
+            </StackPanel>
+            <TabControl Height="280">
+                <TabItem Header="Chat" Width="60">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <Label Content="Connected Users:" FontWeight="Bold" />
+                            <ListBox Height="180" Margin="10" />
+                            <Button Content="Drop" HorizontalAlignment="Right" Width="80" Margin="10,0" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Received Messages:" FontWeight="Bold" />
+                                <Label Content="0" />
+                            </StackPanel>
+                            <ListBox Height="180" Margin="10" />
+                            <Button Content="Save to Log" Margin="10,0" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Logs" Width="60">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <Label Content="Log files:" FontWeight="Bold" />
+                            <ListBox Height="180" Margin="10" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="Show" Width="80" Margin="0" />
+                                <Button Content="Drop" Width="80" Margin="10,0" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <Label Content="Log messages:" FontWeight="Bold" />
+                            <ListBox Height="180" Margin="10" />
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+
+        </StackPanel>
     </Grid>
 </Window>
