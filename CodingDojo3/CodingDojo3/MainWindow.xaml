@@ -7,7 +7,7 @@
         xmlns:ViewModels="clr-namespace:CodingDojo3.ViewModel"
         xmlns:Converter="clr-namespace:CodingDojo3.Converter" x:Class="CodingDojo3.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="860" Width="1240" 
+        Title="SmartHome" Height="860" Width="1240" 
         Background="Black" MinHeight="480" MinWidth="640"
         >
     <Window.Resources>
