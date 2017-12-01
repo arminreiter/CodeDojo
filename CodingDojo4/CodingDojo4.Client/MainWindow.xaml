@@ -14,7 +14,7 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Chat Name:" Margin="10" Width="80" />
-                <TextBox Height="23" Width="320" Margin="10" Text="{Binding UserName}" />
+                <TextBox Height="23" Width="310" Margin="10" Text="{Binding UserName}" />
                 <Button Content="Connect" Margin="10" Width="60" Command="{Binding ConnectCommand}" />
             </StackPanel>
 
@@ -22,7 +22,7 @@
             <ListBox Height="190" Margin="10" ItemsSource="{Binding Messages}" />
             <StackPanel Orientation="Horizontal">
                 <Label Content="Message:" Margin="10,0" Width="80" />
-                <TextBox Width="320" Margin="10,0" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Width="310" Margin="10,0" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" />
                 <Button Content="Send" Margin="10,0" Width="60" Command="{Binding SendCommand}"/>
             </StackPanel>
         </StackPanel>
