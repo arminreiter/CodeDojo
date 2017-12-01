@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodingDojo4.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -50,16 +51,15 @@ namespace CodingDojo4.Server.Logic
                 {
                     var handler = _socket.Accept();
                     var bytes = new byte[1024];
-                    //var bytesReceived = handler.Receive(bytes);
 
                     var clientHandler = new ClientHandler(handler);
                     clientHandler.MessageReceived += ClientHandler_MessageReceived;
                     _clients.Add(clientHandler);
-
-                    //string message = Encoding.UTF8.GetString(bytes,0, bytesReceived);
-                    //_socket.Send(Encoding.UTF8.GetBytes(message));
                 }
-                catch (Exception e) { System.Diagnostics.Trace.TraceWarning(e.Message); }
+                catch (Exception ex)
+                {
+                    Logger.LogError(ex);
+                }
             }
         }
         

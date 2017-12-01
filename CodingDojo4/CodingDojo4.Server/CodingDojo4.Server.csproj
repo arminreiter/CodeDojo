@@ -113,5 +113,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodingDojo4.Core\CodingDojo4.Core.csproj">
+      <Project>{a48855a3-eca8-4edf-9eb1-857456a95934}</Project>
+      <Name>CodingDojo4.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

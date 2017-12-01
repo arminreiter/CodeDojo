@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodingDojo4.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -10,8 +11,6 @@ namespace CodingDojo4.Server.Logic
 {
     public class ClientHandler
     {
-        private const string END_MESSAGE = "@quit";
-
         private Socket _socket;
         private Thread _listener;
 
@@ -37,7 +36,9 @@ namespace CodingDojo4.Server.Logic
                     var bytes = new byte[1024];
                     var bytesReceived = _socket.Receive(bytes);
                     var message = Encoding.UTF8.GetString(bytes, 0, bytesReceived);
-                    
+
+                    Logger.Log("MESSAGE received: " + message);
+
                     string messageText = message;
 
                     if (message.Contains(":"))
@@ -51,20 +52,24 @@ namespace CodingDojo4.Server.Logic
                     if (MessageReceived != null)
                         MessageReceived(_socket, message);
                     
-                    if (messageText.Equals(END_MESSAGE))
+                    if (messageText.Equals(Globals.QUITMESSAGE))
                     {
                         Stop();
                         return;
                     }
 
                 }
-                catch (Exception e) { System.Diagnostics.Trace.TraceWarning(e.Message); }
+                catch (Exception ex)
+                {
+                    Logger.LogError(ex);
+                }
             }
         }
 
         public void Stop()
         {
-            SendMessage(END_MESSAGE);
+            SendMessage(Globals.QUITMESSAGE);
+            Logger.Log("DISCONNECT CLIENT " + UserName);
             _socket.Close(1);
             _listener.Abort();
         }

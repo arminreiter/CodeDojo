@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using CodingDojo4.Core;
 
 namespace CodingDojo4.Server.ViewModel
 {
@@ -21,14 +22,12 @@ namespace CodingDojo4.Server.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        const string IP = "127.0.0.1";
-        const int PORT = 10100;
         const string LOGFILE_EXT = ".log";
         const string LOGFILE_FOLDER = "Logs/";
 
         private Logic.Server _server;
-
         private bool isConnected = false;
+
         public ObservableCollection<string> Users { get; private set; }
         public ObservableCollection<string> Messages { get; private set; }
         public ObservableCollection<string> LogFiles
@@ -104,7 +103,7 @@ namespace CodingDojo4.Server.ViewModel
         {
             if (_server == null)
             {
-                _server = new Logic.Server(IP, PORT);
+                _server = new Logic.Server(Globals.IP, Globals.PORT);
                 _server.MessageReceived += _server_MessageReceived;
             }
             _server.Start();
