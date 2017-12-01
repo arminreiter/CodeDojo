@@ -2,6 +2,8 @@ using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodingDojo4.Server.ViewModel
 {
@@ -21,23 +23,39 @@ namespace CodingDojo4.Server.ViewModel
     {
         const string IP = "127.0.0.1";
         const int PORT = 10100;
+        const string LOGFILE_EXT = ".log";
+        const string LOGFILE_FOLDER = "Logs/";
 
         private Logic.Server _server;
 
         private bool isConnected = false;
         public ObservableCollection<string> Users { get; private set; }
         public ObservableCollection<string> Messages { get; private set; }
+        public ObservableCollection<string> LogFiles
+        {
+            get
+            {
+                CheckLogFolder();
+                var logfiles = System.IO.Directory.EnumerateFiles(LOGFILE_FOLDER, "*" + LOGFILE_EXT);
+                var logfilesWithoutFolder = logfiles.Select(x => x.Remove(0, LOGFILE_FOLDER.Length));
+                return new ObservableCollection<string>(logfilesWithoutFolder);
+            }
+        }
 
-        public int ReceivedMessages { get; set; }
+        public List<string> OpenLogFileContent { get; private set; }
+
+        public string SelectedUser { get; set; }
+        public string SelectedLog { get; set; }
+        private string SelectedLogFile { get { return LOGFILE_FOLDER + SelectedLog; } }
         
         #region commands
 
         public RelayCommand StartCommand    { get => new RelayCommand(StartServer, () => !isConnected); }
         public RelayCommand StopCommand     { get => new RelayCommand(StopServer, () => isConnected); }
-        public RelayCommand DropUserCommand { get => new RelayCommand(DropUser); }
-        public RelayCommand SaveLogCommand  { get => new RelayCommand(SaveLog); }
-        public RelayCommand OpenLogCommand  { get => new RelayCommand(OpenLog); }
-        public RelayCommand DropLogCommand  { get => new RelayCommand(DropLog); }
+        public RelayCommand DropUserCommand { get => new RelayCommand(DropUser, () => !String.IsNullOrEmpty(SelectedUser)); }
+        public RelayCommand SaveLogCommand  { get => new RelayCommand(SaveLog, () => Messages.Count > 0); }
+        public RelayCommand OpenLogCommand  { get => new RelayCommand(OpenLog, () => !String.IsNullOrEmpty(SelectedLog)); }
+        public RelayCommand DropLogCommand  { get => new RelayCommand(DropLog, () => !String.IsNullOrEmpty(SelectedLog)); }
                                             
         #endregion
 
@@ -52,18 +70,34 @@ namespace CodingDojo4.Server.ViewModel
 
         private void DropUser()
         {
+            _server.DropUser(SelectedUser);
+            Users.Remove(SelectedUser);
         }
 
         private void SaveLog()
         {
+            CheckLogFolder();
+            var messages = string.Join(Environment.NewLine, Messages.ToArray());
+            System.IO.File.WriteAllText(LOGFILE_FOLDER + DateTime.Now.ToString("yyyy-MM-ddTHHmmss") + LOGFILE_EXT, messages);
+            RaisePropertyChanged("LogFiles");
         }
 
         private void OpenLog()
         {
+            if(System.IO.File.Exists(SelectedLogFile))
+            {
+                OpenLogFileContent = System.IO.File.ReadAllLines(SelectedLogFile).ToList();
+                RaisePropertyChanged("OpenLogFileContent");
+            }
         }
 
         private void DropLog()
         {
+            if (System.IO.File.Exists(SelectedLogFile))
+            {
+                System.IO.File.Delete(SelectedLogFile);
+                RaisePropertyChanged("LogFiles");
+            }
         }
 
         private void StartServer()
@@ -77,6 +111,12 @@ namespace CodingDojo4.Server.ViewModel
             isConnected = true;
         }
 
+        private void StopServer()
+        {
+            _server.Stop();
+            isConnected = false;
+        }
+
         private void _server_MessageReceived(object sender, string e)
         {
             if (e.Contains(":"))
@@ -88,10 +128,10 @@ namespace CodingDojo4.Server.ViewModel
             Messages.Add(e);
         }
 
-        private void StopServer()
+        private void CheckLogFolder()
         {
-            _server.Stop();
-            isConnected = false;
+            if (!System.IO.Directory.Exists(LOGFILE_FOLDER))
+                System.IO.Directory.CreateDirectory(LOGFILE_FOLDER);
         }
     }
 }

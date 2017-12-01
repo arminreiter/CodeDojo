@@ -10,11 +10,15 @@ namespace CodingDojo4.Server.Logic
 {
     public class ClientHandler
     {
-        public Socket ClientSocket { get { return _socket; } }
+        private const string END_MESSAGE = "@quit";
+
         private Socket _socket;
         private Thread _listener;
 
-        public event EventHandler<string> MessageReceived; 
+        public event EventHandler<string> MessageReceived;
+
+        public Socket ClientSocket { get { return _socket; } }
+        public string UserName { get; set; }
 
         public ClientHandler(Socket socket)
         {
@@ -33,9 +37,25 @@ namespace CodingDojo4.Server.Logic
                     var bytes = new byte[1024];
                     var bytesReceived = _socket.Receive(bytes);
                     var message = Encoding.UTF8.GetString(bytes, 0, bytesReceived);
+                    
+                    string messageText = message;
 
+                    if (message.Contains(":"))
+                    {
+                        messageText = message.Substring(message.IndexOf(':') + 1).Trim();
+
+                        if(String.IsNullOrEmpty(UserName))
+                            UserName = message.Substring(0, message.IndexOf(':'));
+                    }
+                    
                     if (MessageReceived != null)
                         MessageReceived(_socket, message);
+                    
+                    if (messageText.Equals(END_MESSAGE))
+                    {
+                        Stop();
+                        return;
+                    }
 
                 }
                 catch (Exception e) { System.Diagnostics.Trace.TraceWarning(e.Message); }
@@ -44,7 +64,8 @@ namespace CodingDojo4.Server.Logic
 
         public void Stop()
         {
-            _socket.Close();
+            SendMessage(END_MESSAGE);
+            _socket.Close(1);
             _listener.Abort();
         }
 

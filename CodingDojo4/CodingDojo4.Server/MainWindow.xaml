@@ -26,7 +26,7 @@
 
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <Label Content="Connected Users:" FontWeight="Bold" />
-                            <ListBox Height="180" Margin="10" ItemsSource="{Binding Users}" />
+                            <ListBox Height="180" Margin="10" ItemsSource="{Binding Users}" SelectedValue="{Binding SelectedUser}" />
                             <Button Content="Drop" HorizontalAlignment="Right" Width="80" Margin="10,0" Command="{Binding DropUserCommand}" />
                         </StackPanel>
 
@@ -49,7 +49,7 @@
 
                         <StackPanel Orientation="Vertical" Grid.Column="0">
                             <Label Content="Log files:" FontWeight="Bold" />
-                            <ListBox Height="180" Margin="10" />
+                            <ListBox Height="180" Margin="10" ItemsSource="{Binding LogFiles}" SelectedValue="{Binding SelectedLog}" />
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Button Content="Show" Width="80" Margin="0" Command="{Binding OpenLogCommand}" />
                                 <Button Content="Drop" Width="80" Margin="10,0" Command="{Binding DropLogCommand}" />
@@ -58,7 +58,7 @@
 
                         <StackPanel Orientation="Vertical" Grid.Column="1">
                             <Label Content="Log messages:" FontWeight="Bold" />
-                            <ListBox Height="180" Margin="10" />
+                            <ListBox Height="180" Margin="10" ItemsSource="{Binding OpenLogFileContent}" />
                         </StackPanel>
                     </Grid>
                 </TabItem>

@@ -74,6 +74,16 @@ namespace CodingDojo4.Server.Logic
             }
         }
 
+        public void DropUser(string selectedUser)
+        {
+            var client = _clients.FirstOrDefault(x => x.UserName.Equals(selectedUser));
+            if(client != null)
+            {
+                client.Stop();
+                _clients.Remove(client);
+            }
+        }
+
         private void ClientHandler_MessageReceived(object sender, string e)
         {
             App.Current.Dispatcher.Invoke(() =>
