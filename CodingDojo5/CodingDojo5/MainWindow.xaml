@@ -33,7 +33,41 @@
 
         <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem}" ItemTemplate="{StaticResource DefaultLayout}"/>
 
-        <StackPanel Grid.Column="1"/>
-        <StackPanel Grid.ColumnSpan="2" Grid.Row="1"/>
+        <ItemsControl Grid.Column="1" ItemsSource="{Binding CurrentItem.Items}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Width="200" Margin="5" Padding="3">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Image}" Height="60" />
+                                <Label Content="{Binding Description}" />
+                                <Label Content="{Binding AgeRecommendation}" FontWeight="Bold" />
+                            </StackPanel>
+                            <Button Content="Buy" 
+                                    Command="{Binding DataContext.BuyCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    CommandParameter="{Binding}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ListBox Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding ShoppingCart}" >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Image}" Height="80"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

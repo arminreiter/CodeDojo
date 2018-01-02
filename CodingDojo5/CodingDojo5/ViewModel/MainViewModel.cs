@@ -1,4 +1,5 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
 
 namespace CodingDojo5.ViewModel
@@ -17,8 +18,27 @@ namespace CodingDojo5.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private ItemVm currentItem;
+        public ItemVm CurrentItem
+        {
+            get { return currentItem; }
+            set
+            {
+                currentItem = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public ObservableCollection<ItemVm> Items { get; set; }
         public ObservableCollection<ItemVm> ShoppingCart { get; set; }
+
+        public RelayCommand<ItemVm> BuyCommand
+        {
+            get
+            {
+                return new RelayCommand<ItemVm>(x => ShoppingCart.Add(x));
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -26,15 +46,8 @@ namespace CodingDojo5.ViewModel
         public MainViewModel()
         {
             Items = new ObservableCollection<ItemVm>();
+            ShoppingCart = new ObservableCollection<ItemVm>();
             LoadDemoData();
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
         }
 
         private void LoadDemoData()
